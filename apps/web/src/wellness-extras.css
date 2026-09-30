@@ -1,0 +1,260 @@
+.wellness-page {
+  --wellness-forest: #143d2b;
+  --wellness-forest-deep: #102e21;
+  --wellness-sage: #8faf8b;
+  --wellness-cream: #f7f3e8;
+  --wellness-gold: #d8b44a;
+  --wellness-ink: #203a2a;
+  --wellness-muted: #647465;
+  --wellness-line: rgba(65, 99, 67, .16);
+  --wellness-glass: rgba(255, 255, 250, .77);
+  min-height: 70vh;
+  padding: 24px 0 100px;
+  color: var(--wellness-ink);
+  font-family: var(--font-body, 'DM Sans', 'Segoe UI', sans-serif);
+  background: radial-gradient(circle at 89% 20%, rgba(174, 198, 139, .22), transparent 25%),
+    radial-gradient(circle at 5% 77%, rgba(216, 180, 74, .1), transparent 28%), var(--wellness-cream);
+}
+
+.wellness-page *, .wellness-page *::before, .wellness-page *::after { box-sizing: border-box; }
+.wellness-page button { font: inherit; }
+.wellness-page button:focus-visible { outline: 3px solid var(--wellness-gold); outline-offset: 3px; }
+.wellness-container { width: min(1240px, calc(100% - 48px)); margin-inline: auto; }
+.wellness-kicker { display: inline-flex; align-items: center; gap: 9px; color: #738d64; font-size: 11px; font-weight: 800; letter-spacing: .17em; text-transform: uppercase; }
+.wellness-kicker svg { color: var(--wellness-gold); }
+.wellness-page h1, .wellness-page h2, .wellness-page h3, .wellness-cover-stamp { font-family: var(--font-display, 'Manrope', 'DM Sans', sans-serif); font-weight: 750; }
+.wellness-page h1 em { color: var(--wellness-gold); font-style: normal; }
+.wellness-page p { line-height: 1.65; }
+.wellness-button { display: inline-flex; align-items: center; justify-content: center; gap: 11px; min-height: 46px; padding: 11px 20px; border: 1px solid transparent; border-radius: 999px; font-size: 12px !important; font-weight: 800 !important; text-decoration: none; white-space: nowrap; cursor: pointer; transition: transform .22s ease, box-shadow .22s ease, background .22s ease; }
+.wellness-button:hover { transform: translateY(-3px); }
+.wellness-button-gold { color: #233722; background: linear-gradient(115deg, #edda83, var(--wellness-gold)); box-shadow: 0 12px 25px rgba(38, 61, 29, .18); }
+.wellness-button-gold:hover { box-shadow: 0 16px 30px rgba(38, 61, 29, .24); }
+.wellness-button-forest { color: #f9f6e9; background: var(--wellness-forest); box-shadow: 0 10px 25px rgba(20, 61, 43, .15); }
+.wellness-button-forest:hover { background: #1c5138; box-shadow: 0 15px 31px rgba(20, 61, 43, .22); }
+.wellness-button-outline { color: var(--wellness-forest); border-color: #8ca789; background: rgba(255, 255, 249, .53); }
+.wellness-button-outline:hover { background: #fffdf3; }
+.wellness-section-heading h2 { margin: 12px 0 9px; color: var(--wellness-forest-deep); font-size: clamp(29px, 3.1vw, 45px); line-height: 1.16; letter-spacing: -.045em; }
+.wellness-section-heading p { max-width: 580px; margin: 0; color: var(--wellness-muted); font-size: 14px; }
+
+.wellness-cover { position: relative; display: flex; align-items: center; width: min(1480px, calc(100% - 48px)); min-height: 494px; margin: 0 auto; overflow: hidden; isolation: isolate; border: 1px solid rgba(255, 255, 255, .7); border-radius: 31px; background-color: var(--wellness-forest); background-image: linear-gradient(90deg, rgba(10, 42, 28, .96) 0%, rgba(17, 55, 37, .87) 35%, rgba(16, 51, 35, .32) 68%, rgba(9, 33, 24, .06)), url('/wellness-retreat.webp'); background-size: cover; background-position: center 49%; box-shadow: 0 24px 65px rgba(20, 61, 43, .18); }
+.wellness-cover::after { content: ''; position: absolute; inset: auto -7% -30% 38%; height: 55%; z-index: -1; border-radius: 50%; background: radial-gradient(ellipse, rgba(194, 210, 137, .23), transparent 67%); }
+.wellness-cover-copy { width: min(650px, 64%); padding: 70px clamp(35px, 6vw, 100px); color: #fffdf1; }
+.wellness-cover .wellness-kicker { color: #dce8ce; }
+.wellness-cover .wellness-kicker svg { color: #ebd274; }
+.wellness-cover h1 { margin: 20px 0; font-size: clamp(48px, 5.2vw, 75px); line-height: 1.04; letter-spacing: -.055em; }
+.wellness-cover p { max-width: 450px; margin: 0 0 28px; color: #e6ecda; font-size: 15px; }
+.wellness-cover-stamp { position: absolute; right: 5.5%; bottom: 9%; display: flex; align-items: center; gap: 12px; padding: 15px 20px; border: 1px solid rgba(255, 255, 255, .55); border-radius: 17px; background: rgba(249, 249, 232, .75); color: var(--wellness-forest); font-size: 18px; line-height: 1.08; box-shadow: 0 12px 35px rgba(10, 38, 24, .18); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); }
+.wellness-cover-stamp svg { color: #a68d33; }
+
+.wellness-program-intro { padding-block: 80px 72px; }
+.wellness-paths { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 34px; }
+.wellness-paths article, .wellness-value-grid article { padding: 27px; border: 1px solid rgba(255, 255, 255, .76); border-radius: 21px; background: var(--wellness-glass); box-shadow: 0 13px 34px rgba(40, 65, 35, .065); -webkit-backdrop-filter: blur(15px); backdrop-filter: blur(15px); }
+.wellness-paths article > span, .wellness-value-grid article > span { display: inline-grid; place-items: center; width: 45px; height: 45px; border-radius: 15px; color: var(--wellness-forest); background: #e8edda; }
+.wellness-paths h3, .wellness-value-grid h3 { margin: 20px 0 7px; color: var(--wellness-forest-deep); font-size: 22px; }
+.wellness-paths p, .wellness-value-grid p { max-width: 300px; margin: 0; color: var(--wellness-muted); font-size: 13px; }
+.wellness-program-list { padding: 0 0 10px; }
+.wellness-list-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 27px; }
+.wellness-filter-row { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 7px; max-width: 570px; }
+.wellness-filter-row button { min-height: 38px; padding: 8px 13px; border: 1px solid #cfdbc7; border-radius: 999px; background: rgba(255, 255, 250, .6); color: #4f694f; font-size: 11px; font-weight: 800; cursor: pointer; transition: color .2s, background .2s, border-color .2s; }
+.wellness-filter-row button:hover, .wellness-filter-row button.is-active { border-color: var(--wellness-forest); background: var(--wellness-forest); color: #fffdf1; }
+.wellness-program-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 21px; }
+.wellness-program-card { display: flex; flex-direction: column; overflow: hidden; border: 1px solid rgba(255, 255, 255, .82); border-radius: 23px; background: rgba(255, 255, 250, .8); box-shadow: 0 15px 38px rgba(40, 65, 35, .09); transition: transform .25s ease, box-shadow .25s ease; }
+.wellness-program-card:hover { transform: translateY(-5px); box-shadow: 0 22px 46px rgba(40, 65, 35, .15); }
+.wellness-program-art { position: relative; display: grid; place-items: center; min-height: 215px; overflow: hidden; background: linear-gradient(180deg, rgba(15, 55, 36, .03), rgba(12, 48, 31, .4)), url('/wellness-flow.webp') center / cover; }
+.wellness-program-art::before, .wellness-program-art::after { content: ''; position: absolute; border: 1px solid rgba(239, 240, 205, .25); border-radius: 50%; }
+.wellness-program-art::before { width: 265px; height: 265px; right: -63px; bottom: -142px; box-shadow: 0 0 0 28px rgba(237, 235, 189, .075), 0 0 0 56px rgba(237, 235, 189, .055); }
+.wellness-program-art::after { width: 195px; height: 195px; left: -105px; top: -100px; }
+.wellness-art-1 { background-image: linear-gradient(180deg, rgba(15, 55, 36, .03), rgba(12, 48, 31, .38)), url('/wellness-restorative.webp'); }
+.wellness-art-2 { background-image: linear-gradient(180deg, rgba(15, 55, 36, .03), rgba(12, 48, 31, .38)), url('/wellness-calm.webp'); }
+.wellness-art-3 { background-image: linear-gradient(180deg, rgba(15, 55, 36, .03), rgba(12, 48, 31, .38)), url('/wellness-retreat.webp'); }
+.wellness-program-number { position: absolute; top: 17px; left: 19px; color: rgba(255, 255, 239, .84); font-family: var(--font-display, 'Manrope', 'DM Sans', sans-serif); font-size: 18px; font-weight: 700; }
+.wellness-program-art-icon { position: absolute; left: 17px; bottom: 15px; display: grid; place-items: center; width: 42px; height: 42px; border: 1px solid rgba(255, 255, 244, .64); border-radius: 50%; color: #f2edc9; background: rgba(12, 50, 32, .44); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.wellness-program-art-icon svg { width: 23px; height: 23px; }
+.wellness-program-kind { position: absolute; right: 17px; bottom: 17px; padding: 5px 11px; border: 1px solid rgba(255, 255, 255, .65); border-radius: 999px; color: #f9f5df; background: rgba(20, 61, 43, .46); font-size: 10px; font-weight: 800; text-transform: capitalize; -webkit-backdrop-filter: blur(9px); backdrop-filter: blur(9px); }
+.wellness-program-card-body { display: flex; flex: 1; flex-direction: column; padding: 23px; }
+.wellness-card-category { color: #9e8440; font-size: 10px; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; }
+.wellness-program-card h3 { margin: 8px 0 6px; color: var(--wellness-forest-deep); font-size: 26px; letter-spacing: -.04em; }
+.wellness-program-card p { flex: 1; margin: 0 0 25px; color: var(--wellness-muted); font-size: 13px; }
+.wellness-program-details { display: flex; justify-content: space-between; gap: 12px; padding: 15px 0; border-top: 1px solid var(--wellness-line); font-size: 12px; }
+.wellness-program-details span { display: inline-flex; align-items: center; gap: 7px; color: var(--wellness-muted); }
+.wellness-program-details strong { color: var(--wellness-forest); white-space: nowrap; }
+.wellness-program-card .wellness-button { align-self: flex-start; margin-top: 7px; }
+.wellness-empty { padding: 60px 25px; border: 1px solid var(--wellness-line); border-radius: 22px; background: var(--wellness-glass); text-align: center; }
+.wellness-empty svg { color: var(--wellness-sage); }
+.wellness-empty h3 { margin: 13px 0 6px; font-size: 25px; }
+.wellness-empty p { margin: 0 0 20px; color: var(--wellness-muted); }
+
+.wellness-meditation-hero { min-height: 285px; display: flex; align-items: center; background: linear-gradient(90deg, rgba(9, 37, 24, .88), rgba(20, 61, 43, .62)), url('/wellness-retreat.webp') center 58% / cover; color: #fffdf0; }
+.wellness-meditation-hero .wellness-container { padding-block: 35px; }
+.wellness-meditation-hero .wellness-kicker { color: #e6e6c8; }
+.wellness-meditation-hero h1 { margin: 12px 0 10px; font-size: clamp(43px, 5vw, 68px); letter-spacing: -.05em; line-height: 1.08; }
+.wellness-meditation-hero p { max-width: 480px; margin: 0; color: #dce8d9; font-size: 14px; }
+.wellness-meditation-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(310px, .75fr); gap: 22px; margin-top: -28px; align-items: start; position: relative; }
+.wellness-breath-card, .wellness-options-card, .wellness-chart-card, .wellness-next-card, .wellness-profile-card, .wellness-profile-practice { border: 1px solid rgba(255, 255, 255, .82); border-radius: 24px; background: rgba(255, 255, 250, .86); box-shadow: 0 18px 44px rgba(30, 64, 39, .095); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); }
+.wellness-breath-card { min-height: 630px; padding: 27px 30px 35px; text-align: center; }
+.wellness-breath-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: #768575; font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.wellness-breath-top span:first-child { display: inline-flex; align-items: center; gap: 8px; }
+.wellness-breath-top svg { color: var(--wellness-gold); }
+.wellness-breath-orb { width: clamp(185px, 24vw, 255px); height: clamp(185px, 24vw, 255px); display: grid; place-items: center; margin: 45px auto 19px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #e8edc1, #8aaa82 48%, #365e43 72%, #153e2d); box-shadow: 0 0 0 16px rgba(143, 175, 139, .13), 0 0 0 36px rgba(143, 175, 139, .08), 0 23px 60px rgba(24, 72, 45, .22); transform: scale(.92); }
+.wellness-breath-orb.is-running { animation: wellness-breathe 8s ease-in-out infinite; }
+.wellness-breath-orb > div { width: 45%; height: 45%; display: grid; place-items: center; border: 1px solid rgba(255, 255, 239, .55); border-radius: 50%; color: #fffdea; background: rgba(255, 255, 239, .12); box-shadow: 0 0 0 18px rgba(255, 255, 239, .07); }
+.wellness-breath-phase { margin: 10px 0 5px; color: #6a8269; font-size: 13px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.wellness-timer { display: block; color: var(--wellness-forest); font-family: var(--font-display, 'Manrope', 'DM Sans', sans-serif); font-size: clamp(52px, 6vw, 76px); font-weight: 750; letter-spacing: -.06em; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.wellness-breath-hint { margin: 3px 0 19px; color: var(--wellness-muted); font-size: 12px; }
+.wellness-timer-actions { display: flex; align-items: center; justify-content: center; gap: 8px; }
+.wellness-icon-button { width: 46px; height: 46px; display: grid; place-items: center; border: 1px solid var(--wellness-line); border-radius: 50%; background: #f3f5e9; color: var(--wellness-forest); cursor: pointer; }
+.wellness-icon-button:hover { background: #e5ebd9; }
+.wellness-finish-button { display: block; margin: 14px auto 0; border: 0; background: none; color: var(--wellness-forest); font-size: 12px; font-weight: 800; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
+.wellness-saved { display: inline-flex; align-items: center; gap: 6px; margin: 15px 0 0; color: var(--wellness-forest); font-size: 12px; }
+.wellness-meditation-side { display: grid; gap: 16px; }
+.wellness-options-card { padding: 26px; }
+.wellness-options-card h2 { margin: 10px 0 5px; color: var(--wellness-forest); font-size: 29px; letter-spacing: -.045em; }
+.wellness-options-card p { margin: 0 0 19px; color: var(--wellness-muted); font-size: 12px; }
+.wellness-duration-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; }
+.wellness-duration-grid button { min-height: 67px; border: 1px solid #d6dfcb; border-radius: 13px; background: #f7f8ef; color: var(--wellness-forest); font-size: 21px; font-weight: 800; cursor: pointer; transition: background .2s, color .2s; }
+.wellness-duration-grid button small { display: block; margin-top: 1px; font-size: 10px; font-weight: 800; }
+.wellness-duration-grid button.is-active, .wellness-duration-grid button:hover { border-color: var(--wellness-forest); background: var(--wellness-forest); color: #fffdf1; }
+.wellness-sound-list { display: grid; gap: 7px; }
+.wellness-sound-list button { display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 9px 12px; border: 1px solid #e0e7d8; border-radius: 12px; background: #f7f8ef; color: #4b624c; font-size: 12px; font-weight: 800; text-align: left; cursor: pointer; }
+.wellness-sound-list button svg:last-child:not(:first-child) { margin-left: auto; }
+.wellness-sound-list button.is-active, .wellness-sound-list button:hover { border-color: #98b39a; background: #e9efdf; color: var(--wellness-forest); }
+.wellness-inline-message { padding: 10px; border-radius: 9px; background: #fff4df; color: #654d22 !important; }
+.wellness-meditation-note { display: flex; gap: 13px; padding: 18px; border: 1px solid #cfdbc5; border-radius: 18px; background: #eaf0df; color: var(--wellness-forest); }
+.wellness-meditation-note > svg { flex: none; color: #9c9c54; }
+.wellness-meditation-note strong { font-size: 13px; }
+.wellness-meditation-note p { margin: 3px 0 0; color: #637263; font-size: 11px; }
+.wellness-continue { margin-top: 36px; padding: 30px 35px; border: 1px solid #dce5d2; border-radius: 23px; background: #edf1e4; }
+.wellness-continue > span { display: inline-flex; align-items: center; gap: 8px; color: #788c6c; font-size: 10px; font-weight: 800; letter-spacing: .13em; }
+.wellness-continue h2 { margin: 8px 0 5px; font-size: 31px; }
+.wellness-continue p { margin: 0 0 16px; color: var(--wellness-muted); font-size: 13px; }
+
+.wellness-page-intro { padding: 52px 0 37px; }
+.wellness-page-intro h1 { max-width: 830px; margin: 13px 0; color: var(--wellness-forest); font-size: clamp(47px, 5.2vw, 71px); letter-spacing: -.055em; line-height: 1.06; }
+.wellness-page-intro p { max-width: 650px; margin: 0; color: var(--wellness-muted); font-size: 15px; }
+.wellness-progress-content { display: grid; gap: 20px; }
+.wellness-metric-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 15px; }
+.wellness-metric-grid article { min-height: 176px; padding: 21px; border: 1px solid rgba(255, 255, 255, .85); border-radius: 19px; background: var(--wellness-glass); box-shadow: 0 12px 31px rgba(39, 73, 40, .07); }
+.wellness-metric-grid article > span { width: 35px; height: 35px; display: grid; place-items: center; margin-bottom: 12px; border-radius: 11px; background: #e9efd9; color: #7c954e; }
+.wellness-metric-grid small { display: block; color: #6d816e; font-size: 11px; font-weight: 800; }
+.wellness-metric-grid strong { display: block; margin: 4px 0; color: var(--wellness-forest); font-family: var(--font-display, 'Manrope', 'DM Sans', sans-serif); font-size: 32px; font-weight: 750; line-height: 1.1; }
+.wellness-metric-grid p { margin: 0; color: var(--wellness-muted); font-size: 10px; }
+.wellness-progress-grid { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(285px, .85fr); gap: 18px; }
+.wellness-chart-card, .wellness-next-card { min-height: 390px; padding: 26px; }
+.wellness-card-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 15px; }
+.wellness-chart-card h2, .wellness-next-card h2 { margin: 10px 0 4px; color: var(--wellness-forest); font-size: 31px; letter-spacing: -.04em; }
+.wellness-chart-card p, .wellness-next-card p { margin: 0; color: var(--wellness-muted); font-size: 12px; }
+.wellness-chart-legend { display: inline-flex; align-items: center; gap: 6px; color: #748074; font-size: 10px; white-space: nowrap; }
+.wellness-chart-legend i { width: 8px; height: 8px; border-radius: 50%; background: #86a662; }
+.wellness-chart { position: relative; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 12px; height: 231px; margin-top: 22px; border-bottom: 1px solid var(--wellness-line); }
+.wellness-chart-lines { position: absolute; z-index: 0; inset: 0 0 34px; display: flex; flex-direction: column; justify-content: space-evenly; pointer-events: none; }
+.wellness-chart-lines span { display: block; border-top: 1px dashed #dce5d5; }
+.wellness-chart-day { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; min-width: 0; }
+.wellness-chart-bar-track { display: flex; align-items: end; justify-content: center; flex: 1; width: 100%; }
+.wellness-chart-bar-track > span { width: min(43px, 75%); min-height: 5px; border-radius: 8px 8px 0 0; background: #dce6cf; }
+.wellness-chart-bar-track > span.has-practice { background: linear-gradient(180deg, #bad16c, #6d9859); box-shadow: 0 4px 15px rgba(102, 140, 78, .2); }
+.wellness-chart-day strong { margin-top: 7px; color: #536a55; font-size: 10px; }
+.wellness-chart-day small { color: #8a9888; font-size: 9px; }
+.wellness-chart-empty { margin-top: 11px !important; }
+.wellness-next-card { display: flex; flex-direction: column; }
+.wellness-upcoming-list { display: grid; gap: 0; margin: 17px 0 18px; }
+.wellness-upcoming-list article { position: relative; display: flex; gap: 13px; padding: 12px 0; border-bottom: 1px solid var(--wellness-line); }
+.wellness-upcoming-dot { width: 11px; height: 11px; flex: none; margin-top: 4px; border: 3px solid #e8dfac; border-radius: 50%; background: #8a9d5e; box-shadow: 0 0 0 5px #f3f2df; }
+.wellness-upcoming-list small { color: #718471; font-size: 10px; }
+.wellness-upcoming-list h3 { margin: 3px 0; font-family: inherit; font-size: 13px; font-weight: 800; }
+.wellness-upcoming-list article div > span { color: #9a8748; font-size: 10px; text-transform: capitalize; }
+.wellness-upcoming-empty { display: grid; justify-items: center; align-content: center; gap: 11px; flex: 1; padding: 25px 12px; text-align: center; }
+.wellness-upcoming-empty svg { color: var(--wellness-sage); }
+.wellness-upcoming-empty p { max-width: 220px; }
+.wellness-next-card .wellness-button { align-self: flex-start; margin-top: auto; }
+.wellness-data-note { display: inline-flex; align-items: center; gap: 8px; margin: 0; color: #778674; font-size: 11px; }
+.wellness-data-note svg { flex: none; color: #b69d51; }
+
+.wellness-community-cover { background-image: linear-gradient(90deg, rgba(10, 42, 28, .96) 0%, rgba(17, 55, 37, .86) 35%, rgba(16, 51, 35, .29) 68%, rgba(9, 33, 24, .04)), url('/wellness-calm.webp'); background-position: center 55%; }
+.wellness-community-values { padding-block: 79px; }
+.wellness-value-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 17px; margin-top: 30px; }
+.wellness-value-grid article { min-height: 224px; }
+.wellness-community-cta { display: flex; align-items: center; justify-content: space-between; gap: 30px; padding: 40px 44px; border: 1px solid rgba(255, 255, 255, .2); border-radius: 23px; background: radial-gradient(circle at 85% 20%, rgba(139, 166, 109, .18), transparent 25%), var(--wellness-forest); color: #fffdf0; }
+.wellness-community-cta .wellness-kicker { color: #dce8cf; }
+.wellness-community-cta h2 { max-width: 510px; margin: 11px 0 5px; font-size: clamp(29px, 3.2vw, 42px); }
+.wellness-community-cta p { max-width: 530px; margin: 0; color: #d1dfd0; font-size: 13px; }
+.wellness-community-cta .wellness-button { flex: none; }
+
+.wellness-profile-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(290px, .8fr); align-items: start; gap: 22px; }
+.wellness-profile-card { overflow: hidden; }
+.wellness-profile-banner { height: 140px; display: flex; align-items: start; justify-content: space-between; padding: 24px; background: radial-gradient(circle at 70% 35%, rgba(209, 221, 153, .28), transparent 28%), linear-gradient(115deg, #214d35, #133826); color: #f7eed0; }
+.wellness-profile-banner > span { font-size: 10px; font-weight: 800; letter-spacing: .17em; }
+.wellness-profile-avatar { position: relative; width: 96px; height: 96px; display: grid; place-items: center; margin: -48px auto 0; border: 5px solid #fbfaf1; border-radius: 50%; background: linear-gradient(140deg, #d5dca9, #87a781); color: var(--wellness-forest); box-shadow: 0 9px 26px rgba(20, 61, 43, .15); font-family: var(--font-display, 'Manrope', 'DM Sans', sans-serif); font-size: 30px; font-weight: 750; }
+.wellness-profile-identity { padding: 13px 25px 20px; text-align: center; }
+.wellness-profile-identity h2 { margin: 0 0 5px; color: var(--wellness-forest); font-size: 31px; }
+.wellness-profile-identity p { margin: 0; color: var(--wellness-muted); font-size: 12px; }
+.wellness-profile-facts { margin: 0 24px 19px; padding: 5px 0; border-top: 1px solid var(--wellness-line); border-bottom: 1px solid var(--wellness-line); }
+.wellness-profile-facts > div { display: flex; align-items: center; gap: 13px; padding: 12px 2px; color: #879c74; }
+.wellness-profile-facts > div > span { display: grid; gap: 3px; min-width: 0; }
+.wellness-profile-facts small { color: #829182; font-size: 10px; }
+.wellness-profile-facts strong { overflow-wrap: anywhere; color: var(--wellness-ink); font-size: 12px; font-weight: 800; text-transform: capitalize; }
+.wellness-signout { margin: 0 24px 26px; }
+.wellness-profile-side { display: grid; gap: 18px; }
+.wellness-profile-practice { padding: 29px; }
+.wellness-profile-practice h2 { margin: 12px 0 5px; color: var(--wellness-forest); font-size: 33px; }
+.wellness-profile-practice > p { margin: 0; color: var(--wellness-muted); font-size: 12px; }
+.wellness-profile-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; margin: 22px 0; }
+.wellness-profile-stats > div { padding: 18px 15px; border: 1px solid #e0e7d8; border-radius: 14px; background: #f5f7eb; }
+.wellness-profile-stats strong { display: block; color: var(--wellness-forest); font-family: var(--font-display, 'Manrope', 'DM Sans', sans-serif); font-size: 29px; font-weight: 750; }
+.wellness-profile-stats span { color: #70816e; font-size: 10px; }
+.wellness-profile-message { display: flex; gap: 15px; padding: 24px; border-radius: 20px; background: #e7edda; color: #728c62; }
+.wellness-profile-message > svg { flex: none; }
+.wellness-profile-message h3 { margin: 0 0 5px; color: var(--wellness-forest); font-size: 22px; }
+.wellness-profile-message p { margin: 0; color: #687967; font-size: 12px; }
+
+@keyframes wellness-breathe { 0%, 100% { transform: scale(.86); } 50% { transform: scale(1.02); } }
+
+@media (max-width: 1050px) {
+  .wellness-list-heading { display: block; }
+  .wellness-filter-row { justify-content: flex-start; max-width: none; margin-top: 18px; }
+  .wellness-program-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .wellness-metric-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 760px) {
+  .wellness-page { padding-top: 12px; padding-bottom: 90px; }
+  .wellness-container { width: min(100% - 30px, 620px); }
+  .wellness-cover { width: calc(100% - 24px); min-height: 545px; align-items: flex-start; border-radius: 23px; background-image: linear-gradient(180deg, rgba(10, 42, 28, .96) 0%, rgba(17, 55, 37, .86) 42%, rgba(16, 51, 35, .2) 100%), url('/wellness-retreat.webp'); background-position: 62% center; }
+  .wellness-community-cover { background-image: linear-gradient(180deg, rgba(10, 42, 28, .96) 0%, rgba(17, 55, 37, .86) 42%, rgba(16, 51, 35, .2) 100%), url('/wellness-calm.webp'); }
+  .wellness-cover-copy { width: 100%; padding: 44px 27px; }
+  .wellness-cover h1 { font-size: clamp(49px, 11vw, 70px); }
+  .wellness-cover p { max-width: 460px; }
+  .wellness-cover-stamp { right: 18px; bottom: 18px; }
+  .wellness-program-intro, .wellness-community-values { padding-block: 55px; }
+  .wellness-paths, .wellness-value-grid { grid-template-columns: 1fr; gap: 10px; }
+  .wellness-paths article, .wellness-value-grid article { min-height: auto; }
+  .wellness-program-grid, .wellness-progress-grid, .wellness-profile-grid, .wellness-meditation-grid { grid-template-columns: 1fr; }
+  .wellness-meditation-grid { margin-top: -20px; }
+  .wellness-meditation-hero { min-height: 270px; }
+  .wellness-breath-card { min-height: auto; padding: 25px 18px 30px; }
+  .wellness-breath-orb { margin-top: 37px; }
+  .wellness-community-cta { display: block; padding: 30px; }
+  .wellness-community-cta .wellness-button { margin-top: 19px; }
+  .wellness-page-intro { padding-block: 34px 27px; }
+}
+
+@media (max-width: 440px) {
+  .wellness-cover { min-height: 560px; }
+  .wellness-cover h1 { font-size: 49px; }
+  .wellness-cover-stamp { padding: 11px 13px; font-size: 14px; }
+  .wellness-program-card-body { padding: 20px; }
+  .wellness-metric-grid { gap: 9px; }
+  .wellness-metric-grid article { min-height: 162px; padding: 15px; }
+  .wellness-metric-grid strong { font-size: 29px; }
+  .wellness-chart-card, .wellness-next-card { padding: 19px; }
+  .wellness-chart { gap: 5px; }
+  .wellness-chart-legend { display: none; }
+  .wellness-data-note { align-items: flex-start; }
+  .wellness-duration-grid { gap: 5px; }
+  .wellness-options-card { padding: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wellness-breath-orb.is-running { animation: none; transform: scale(.92); }
+  .wellness-button, .wellness-program-card { transition: none; }
+  .wellness-button:hover, .wellness-program-card:hover { transform: none; }
+}

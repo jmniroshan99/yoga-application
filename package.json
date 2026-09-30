@@ -1,0 +1,28 @@
+{
+  "name": "sahana-yoga-booking",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "apps/api",
+    "apps/web"
+  ],
+  "scripts": {
+    "setup:local": "node scripts/setup-local.mjs",
+    "admin:reset": "node scripts/reset-admin.mjs",
+    "dev": "concurrently -k \"npm run dev -w @sahana/api\" \"npm run dev -w @sahana/web\"",
+    "build": "npm run build -w @sahana/api && npm run build -w @sahana/web",
+    "typecheck": "npm run typecheck -w @sahana/api && npm run typecheck -w @sahana/web",
+    "test": "npm run test -w @sahana/api",
+    "db:migrate": "npm run db:migrate -w @sahana/api",
+    "db:seed": "npm run db:seed -w @sahana/api",
+    "start": "npm run start -w @sahana/api"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.8",
+    "@electric-sql/pglite-socket": "^0.2.11",
+    "concurrently": "^9.2.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

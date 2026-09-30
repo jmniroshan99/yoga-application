@@ -1,0 +1,199 @@
+Act as a senior product architect, full-stack engineer, UX designer, database engineer, security engineer, and QA lead.
+
+Build a complete, production-oriented Yoga Treatment and Appointment Booking System for a yoga and wellness centre. The system must support individual therapeutic yoga sessions, general yoga classes, group programs, online consultations, and multi-session packages.
+
+PROJECT DEFAULTS
+- Country: Sri Lanka
+- Currency: LKR
+- Business timezone: Asia/Colombo
+- Customer-facing languages: English, Sinhala, and Tamil
+- Organization model: one organization with multiple branches
+- Platforms: responsive web application for customers, practitioners, reception staff, and administrators
+- If an existing repository is supplied, inspect and retain its architecture where practical. If this is a new project, propose a maintainable modular-monolith architecture and select a current, compatible TypeScript web stack with PostgreSQL. Explain the stack choice before implementation.
+- Do not hardcode payment providers, tax rates, cancellation periods, or legal retention periods. Make them configurable.
+
+1. DISCOVERY AND PRODUCT DESIGN
+
+Before writing code, produce:
+1. A concise product requirements document.
+2. User personas and role permissions.
+3. Main user journeys and edge cases.
+4. A screen map and mobile/desktop wireframe descriptions.
+5. A system architecture diagram.
+6. An entity-relationship diagram.
+7. Booking, payment, and practitioner-review state diagrams.
+8. An implementation plan divided into testable milestones.
+9. A table of assumptions and decisions requiring business confirmation.
+
+Then implement the system. Where business information is missing, use a documented, configurable default and continue. Clearly distinguish implemented functionality from planned functionality.
+
+2. USER ROLES AND ACCESS
+
+Implement these roles with server-enforced permissions:
+- Visitor: browse services, practitioners, locations, prices, FAQs, and available times.
+- Customer/client: register, manage profile, submit intake and consent forms, book, pay, reschedule, cancel, view appointments and receipts.
+- Yoga practitioner: manage permitted availability, review assigned clients’ relevant intake information, approve sessions requiring review, record private session notes, mark attendance, and recommend follow-up sessions.
+- Receptionist: create and manage bookings, check in clients, record authorized offline payments, manage waitlists, and view only information necessary for their job.
+- Branch manager: manage branch schedules, rooms, practitioners, services, and operational reports.
+- Super administrator: manage organization settings, users, permissions, audit logs, and integrations.
+
+A practitioner must see sensitive information only for clients assigned to them or otherwise explicitly authorized. Reception staff must not have unrestricted access to private session notes. Apply access checks to every relevant API and database query, not only to visible UI controls.
+
+3. PUBLIC WEBSITE AND CUSTOMER EXPERIENCE
+
+Design a calm, premium, trustworthy interface with accessible typography, restrained color, clear status indicators, and excellent mobile usability.
+
+Include:
+- Home page, services, practitioner profiles, branches, pricing, FAQs, contact, and policies.
+- Service filters for goal, session type, duration, location, language, practitioner, price, and availability.
+- Clear distinction between general wellness classes and practitioner-led therapeutic sessions.
+- Booking flow: choose service → location/online → practitioner or “any available” → date/time → intake requirements → price summary → payment or booking request → confirmation.
+- Account dashboard with upcoming/past bookings, package balance, invoices, intake forms, and notification preferences.
+- Helpful loading, empty, validation, conflict, and payment-failure states.
+- English/Sinhala/Tamil localization architecture, with correct date, time, currency, font, and text rendering.
+- Accessibility target: WCAG 2.2 AA, including keyboard navigation, visible focus, form labels, error descriptions, contrast, and usable mobile touch targets.
+
+Do not advertise guaranteed medical cures or represent yoga as a replacement for emergency or prescribed medical care.
+
+4. SERVICE AND SCHEDULING ENGINE
+
+Support:
+- Private appointments, group classes, online sessions, recurring programs, and multi-session packages.
+- Configurable duration, buffer before/after, price, capacity, prerequisites, location, room, equipment, practitioner qualification, and intake requirements.
+- Multiple branches, practitioners, rooms, holidays, leave, exceptional hours, recurring schedules, and blocked dates.
+- Manual bookings by reception staff and optional practitioner assignment.
+- Waitlists with expiry-based offers.
+- Configurable booking lead time, cancellation window, rescheduling rules, no-show policy, and package expiry.
+- Timezone-safe scheduling: store authoritative timestamps in UTC, retain the business timezone for display and rules, and handle clients booking from other timezones.
+
+Define separate state machines for booking, payment, and intake review. Example booking states: held, pending_review, pending_payment, confirmed, checked_in, completed, cancelled, no_show. Specify valid transitions and who can trigger them.
+
+Prevent double booking under concurrent requests:
+- Check practitioner, room, and client conflicts.
+- Enforce group capacity transactionally.
+- Use database transactions and appropriate constraints or locking.
+- Use short-lived slot holds during checkout and expire abandoned holds.
+- Recheck availability before confirmation and on rescheduling.
+- Make cancellation and rescheduling safe when payment/refund operations fail midway.
+
+5. INTAKE, CONSENT, AND SESSION SAFETY
+
+Before a therapeutic session, collect only information genuinely needed for safe service delivery. Make questions configurable and versioned. Potential fields include goals, relevant physical limitations, pregnancy status where applicable, recent surgery/injury, and emergency contact, but do not assume every field is required for every service.
+
+Implement:
+- Clear purpose and privacy notice for sensitive information.
+- Versioned consent records with timestamp and policy/form version.
+- Practitioner review when a response indicates that suitability needs professional assessment.
+- A “pending review” path that does not automatically prescribe yoga exercises or diagnose a condition.
+- A staff workflow to request more information, approve with appropriate adjustments, or advise seeking a qualified healthcare professional.
+- Guardian consent workflow if the business accepts minors; otherwise block minor registration according to configurable policy.
+- Private practitioner notes, session outcome, attendance, and follow-up recommendation.
+- An incident-reporting workflow with restricted access.
+
+Never put health details in SMS, email subject lines, calendar titles, analytics events, or ordinary application logs. Do not expose private session notes in customer-facing documents unless the practitioner explicitly shares them.
+
+6. PAYMENTS, PACKAGES, AND FINANCE
+
+Implement a provider-agnostic payment interface. Use a sandbox payment adapter and document how to connect a locally supported provider later.
+
+Include:
+- Online payments, authorized cash/bank-transfer recording, deposits if enabled, package purchases, promotional codes, refunds, and invoices/receipts.
+- Price snapshots on each booking so historical transactions do not change when service prices change.
+- Explicit payment states and reconciliation against provider events.
+- Signed webhook verification, idempotent webhook processing, idempotency keys for payment creation, and duplicate-event handling.
+- No storage of raw card details.
+- Configurable taxes, invoice numbering, cancellation fees, and refund policy.
+- Clear audit trail for staff-entered or adjusted payments.
+
+A failed or delayed payment must not produce a silently confirmed booking. A successful payment webhook must not create a duplicate booking.
+
+7. NOTIFICATIONS AND CALENDAR
+
+Provide templates and opt-in controls for email, SMS, and WhatsApp where integrations are available:
+- Booking request received, confirmed, declined, rescheduled, cancelled.
+- Payment success/failure.
+- Upcoming appointment reminders.
+- Waitlist offer and expiry.
+- Package expiry reminders.
+
+Use a background job mechanism with retry, deduplication, delivery status, and dead-letter visibility. Notifications must contain minimal personal information. Provide calendar invite/download functionality without sensitive health details.
+
+8. ADMIN AND PRACTITIONER DASHBOARDS
+
+Build:
+- Calendar views by day/week, practitioner, room, and branch.
+- Booking list with useful filters and clearly displayed statuses.
+- Check-in and attendance management.
+- Service and practitioner management.
+- Availability and leave management.
+- Waitlist management.
+- Consent/intake review queue.
+- Package and payment administration.
+- Reports for bookings, utilization, cancellations, no-shows, revenue, package usage, and service demand.
+- CSV export limited by permissions; prevent sensitive fields from appearing in ordinary operational exports.
+- Audit-log viewer for authorized administrators.
+
+9. DATABASE AND API DESIGN
+
+Create a normalized PostgreSQL schema with migrations, indexes, foreign keys, constraints, and sample data.
+
+Consider entities such as:
+Organization, Branch, Room, User, Role/Permission, ClientProfile, PractitionerProfile, Qualification, Service, ServicePractitioner, AvailabilityRule, AvailabilityException, GroupClass, Booking, BookingParticipant, SlotHold, WaitlistEntry, IntakeFormVersion, IntakeResponse, ConsentRecord, PractitionerReview, SessionNote, Package, PackagePurchase, Payment, Refund, Invoice, Notification, AuditEvent, and IncidentReport.
+
+Document:
+- Cardinality and deletion rules.
+- Sensitive-field classification and encryption approach.
+- Unique and exclusion constraints used to prevent booking conflicts.
+- Data retention and deletion/export workflows.
+- Backup and restore strategy.
+
+Implement versioned API endpoints or equivalent server actions with input validation, consistent errors, authorization checks, rate limits where appropriate, pagination, and generated API documentation.
+
+10. SECURITY AND PRIVACY
+
+Use secure authentication with password reset, email/phone verification as appropriate, secure sessions, CSRF protection where applicable, and MFA for privileged users. Apply least privilege, secure secret management, HTTPS, encryption in transit and at rest, dependency scanning, and audit logging for sensitive reads and changes.
+
+Use OWASP ASVS as a verification baseline. Review applicable current Sri Lankan Personal Data Protection Act requirements and Data Protection Authority guidance before claiming legal compliance. Document processor/vendor data flows, retention settings, access requests, deletion requests, and incident response. Do not claim that the application is legally compliant merely because technical controls exist.
+
+If AI features are proposed, keep them optional and disabled by default. AI must not diagnose, prescribe treatment, approve contraindications, or access client health data without an explicit approved design and human oversight.
+
+11. REQUIRED TESTS AND ACCEPTANCE CRITERIA
+
+Create meaningful unit, integration, and end-to-end tests. Include at least these scenarios:
+- Two customers attempt to book the last private slot simultaneously: exactly one succeeds.
+- Two customers attempt to take the last group-class seat: capacity is never exceeded.
+- A room or practitioner leave conflicts with an existing appointment: the system flags it.
+- Payment webhook arrives twice or out of order: one correct financial outcome.
+- Slot hold expires during checkout: customer receives a clear recovery path.
+- Reschedule crosses branches or timezones: displayed and stored times remain correct.
+- Client cannot read another client’s booking or intake response by changing an ID.
+- Practitioner cannot access an unassigned client’s private records.
+- Receptionist cannot read private session notes.
+- Cancellations and refunds follow configured rules.
+- Sinhala and Tamil content works on mobile and in notifications.
+- Keyboard-only booking and form completion work.
+- Backup restoration and database migration are exercised.
+
+Run type checks, linting, tests, and a production build. Report actual commands and results. Do not claim a test passed unless it was executed.
+
+12. IMPLEMENTATION AND DELIVERY
+
+Work in milestones:
+A. Project foundation, design system, authentication, roles, and database.
+B. Services, availability engine, booking, and customer dashboard.
+C. Intake, consent, practitioner review, and session records.
+D. Payments, packages, notifications, and admin reporting.
+E. Security review, accessibility review, tests, deployment, and documentation.
+
+Deliver:
+- Complete runnable source code, not just mockups or pseudocode.
+- Database migrations and non-sensitive demo seed data.
+- .env.example without real secrets.
+- Local setup and production deployment instructions.
+- Architecture and ERD diagrams.
+- API documentation.
+- Admin/user guide.
+- Test report with pass/fail evidence.
+- Known limitations and a prioritized improvement backlog.
+
+At each milestone, show the files changed, decisions made, validation performed, and remaining risks. Preserve completed functionality as later milestones are added. If execution tools or credentials are unavailable, implement everything that can be completed locally and state the exact unverified integration rather than inventing a successful result.
